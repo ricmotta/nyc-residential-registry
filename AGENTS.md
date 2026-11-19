@@ -8,7 +8,7 @@ Issues and specs live in GitHub Issues for this repo (`gh` CLI). See `docs/agent
 
 ### Triage labels
 
-Default triage vocabulary, except `needs-human` replaces `ready-for-human`. See `docs/agents/triage-labels.md`.
+Default triage vocabulary (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
 
 ### Domain docs
 

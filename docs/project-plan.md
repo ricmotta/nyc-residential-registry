@@ -202,7 +202,7 @@ Initial ranking (to confirm during source research):
 
 ### 9.3 Tickets, skills and agents per part
 
-Suggested labels: `layer:bronze`, `layer:silver`, `layer:gold`, `type:source`, `type:infra`, `type:quality`, `ready-for-agent`, `needs-human`.
+Suggested labels: `layer:bronze`, `layer:silver`, `layer:gold`, `type:source`, `type:infra`, `type:quality`, `ready-for-agent`, `ready-for-human`.
 
 | Part | Example tickets | Skills | Agents | CI brakes |
 |---|---|---|---|---|

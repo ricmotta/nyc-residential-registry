@@ -118,7 +118,7 @@ The main finding: public data answers "which buildings exist and what are they".
 
 - **What they may have**: Floor Plans, Photos, amenities, sometimes available Units.
 - **Terms**: case by case. Each site needs its own check before collection.
-- **Use**: the most promising path to fill Floor Plan and Photo Gaps, using the collection ladder (ADR 0007).
+- **Use**: the most promising path to fill Floor Plan and Photo Gaps, using the collection ladder (ADR 0006).
 
 ## Not researched yet
 

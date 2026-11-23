@@ -58,10 +58,10 @@ Everything starts with one `docker compose up`, at no cost:
 
 | Piece | Tool | Role |
 |---|---|---|
-| Object storage | S3-compatible (MinIO or LocalStack; confirm which one is free and maintained when setting up) | Bronze files, pages, images |
+| Object storage | S3-compatible: SeaweedFS (exact version to confirm in Phase 1; see ADR 0002) | Bronze files, pages, images |
 | Database | PostgreSQL + PostGIS | Silver and Gold, spatial queries |
 | Transformations | dbt (`dbt-postgres`) | Models, tests, field documentation |
-| Orchestration | Airflow | Schedules, retries, alerts, run logs |
+| Orchestration | Airflow with LocalExecutor (no Celery or Redis); its metadata in a separate database on the same PostgreSQL | Schedules, retries, alerts, run logs |
 
 The code talks to storage through the S3 API, so moving to real AWS later means changing endpoints and credentials, not code.
 
@@ -87,6 +87,8 @@ Rules for every collector:
 | Goal | How | When |
 |---|---|---|
 | Parsers and normalizers are correct | TDD with pytest, using saved real pages as fixtures | Every PR |
+| Input rules are encoded once | pydantic models, themselves tested with pytest | Every PR |
+| CI does not depend on the internet | Recorded responses only; a separate scheduled live check alerts when a Source changes | Every PR; live check weekly |
 | Collectors handle errors | Tests with recorded responses (success, 404, 429, timeout) | Every PR |
 | Running twice gives the same result | Idempotency tests | Every PR |
 | Readable, consistent code | `ruff` (lint, format) and `mypy` (types) | Every PR |
@@ -103,7 +105,9 @@ Rules for every collector:
 | Acceptable values (positive area, plausible floors) | dbt `accepted_values` and range tests | Every run and CI |
 | Source format did not change | dbt model contracts | Every run and CI |
 | Source is fresh | `dbt source freshness` | Every run |
-| Collection did not suddenly shrink | Volume test: alert if much less data than last time | Every run |
+| Every record entering Silver is valid | pydantic validation; failures go to quarantine | Every run |
+| Collection did not suddenly shrink | Elementary volume anomaly tests on dbt tables and on `pipeline_runs` | Every run |
+| Quality history and report | Elementary report | Every run |
 | Matching is reliable | Hand-labeled ground truth; CI measures precision and recall | Every PR touching matching |
 
 Every field we create gets a description in dbt `schema.yml`. `dbt docs` produces the data dictionary and lineage.
@@ -113,9 +117,9 @@ Every field we create gets a description in dbt `schema.yml`. `dbt docs` produce
 **Quality.** Critical tests stop the pipeline. Warning-level tests only alert.
 
 **Quarantine and flags.**
-- Rows that fail validation go to a quarantine table with the reason. The rest continues.
-- If quarantine exceeds a threshold (for example 5% of a source), the run fails, because the source probably changed.
-- Flags on Silver and Gold: `needs_review`, `has_conflict`, `low_confidence`, `is_stale`.
+- Data that fails validation goes to a quarantine table with the reason: per field when one value fails, per row when the row cannot be identified or read. The rest continues.
+- If quarantine exceeds a threshold (for example 5% of a source), only that source stops and keeps its last good load, because the source probably changed.
+- Flags on Silver and Gold: `needs_review`, `has_conflict`, `is_stale`. Low confidence is the `low` level of the confidence field, not a flag (ADR 0008).
 
 **Observability.**
 - Airflow: retries, alerts on failure or delay, per-task logs.
@@ -168,11 +172,10 @@ Decision order for each field:
 1. **Valid and permitted.** Terms allow it and the value passed the tests. Otherwise it does not enter.
 2. **Manual override wins.** A table of human decisions, with reason and date.
 3. **Source authority for that field.** A configurable ranking.
-4. **Most recent**, if authority ties.
-5. **Agreement.** If two independent sources agree, confidence goes up.
-6. **Large conflict.** If the difference passes a threshold (for example area differing by more than 10%), keep both values, pick by the rules, and flag `has_conflict` and `needs_review`.
+4. **Agreement.** If two independent sources (different Lineage Groups) agree, confidence goes up.
+5. **Large conflict.** If the difference passes a threshold (a per-field tolerance in the seed; for example area differing by more than 5%), keep both values, pick by the rules, and flag `has_conflict` and `needs_review`.
 
-Configuration: a dbt seed `source_field_priority.csv` (field, source, rank), versioned in Git, with the rule recorded in an ADR. Every final value stores which source won and by which rule.
+Configuration: a dbt seed `source_field_priority.csv` (field, source, rank, with no ties; see ADR 0005), versioned in Git, with the rule recorded in an ADR. Every final value stores which source won and by which rule.
 
 Initial ranking (to confirm during source research):
 

@@ -14,10 +14,22 @@ instead of being hidden.
 2. Practice an AI-assisted "software factory" workflow: clear specs, small
    tickets, automated checks, and coding agents working under human review.
 
+## Development
+
+Requires Python 3.12 and [uv](https://docs.astral.sh/uv/).
+
+```sh
+uv sync            # install dependencies from uv.lock
+uv run pytest      # run the tests
+```
+
+`AGENTS.md` lists every check that CI runs.
+
 ## Status
 
-Phase 0: decisions and research. No product code yet.
+Phase 1: local infrastructure and one official Source end to end. See the [Phase 1 spec](https://github.com/ricmotta/nyc-residential-registry/issues/8).
 
 - Plan: [`docs/project-plan.md`](docs/project-plan.md)
 - Sources: [`docs/source-catalog.md`](docs/source-catalog.md)
-- Decisions: [`docs/adr/`](docs/adr/) (in progress)
+- Decisions: [`docs/adr/`](docs/adr/)
+- Glossary: [`GLOSSARY.md`](GLOSSARY.md)

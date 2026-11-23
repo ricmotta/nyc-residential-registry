@@ -65,11 +65,11 @@ How much a final value can be trusted, in three levels: `high` (set by an Owner 
 _Avoid_: Score, certainty, quality
 
 **Lineage Group**:
-A set of Sources that may copy data from one another, so their agreement does not count as independent confirmation. By default, each Publisher is one Lineage Group.
+A set of Sources that may copy data from one another, so their agreement does not count as independent confirmation. By default, each Publisher is one Lineage Group; a Source can belong to a different group for a specific field.
 _Avoid_: Family, cluster
 
 **Gap**:
-A field with no usable Claim, always labeled with its reason: no known source has the data, a source has it but its terms forbid our use, or a permitted source has it but we have not collected it yet.
+A field with no usable Claim, always labeled with its reason: no known Source has the data; a Source has it but its terms (or its stated wishes, such as `robots.txt`) forbid our use; a Source has it but access needs an authorization we do not have, such as the building owner's; or a permitted Source has it but we have not collected it yet.
 _Avoid_: Missing value, null, hole
 
 ### Quality

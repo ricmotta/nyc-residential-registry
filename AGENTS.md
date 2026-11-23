@@ -12,8 +12,14 @@ Use the glossary's terms.
 
 ## Checks
 
-No tooling yet (it arrives in Phase 1). Planned: `ruff`, `mypy`, `pytest`,
-`dbt build`. Update this section with the real commands when they exist.
+The project uses Python 3.12 and [uv](https://docs.astral.sh/uv/) (`uv.lock` pins every version). Install with `uv sync`, then run the same checks as CI:
+
+- Lint: `uv run ruff check .`
+- Format: `uv run ruff format --check .` (fix with `uv run ruff format .`)
+- Types: `uv run mypy`
+- Tests: `uv run pytest`
+
+CI runs all four on every pull request and never calls a real data Source. Add new commands here when they exist (for example `dbt build`).
 
 ## Conventions
 

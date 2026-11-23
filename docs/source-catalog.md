@@ -74,7 +74,7 @@ The main finding stands: public data answers "which buildings exist and what are
 - **Cadence** (DCP's page): a quarterly major release updates all fields; monthly minor releases update zoning fields only. So building fields change only quarterly.
 - **Access**: Socrata API ([dataset](https://data.cityofnewyork.us/City-Government/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks)) or DCP download ([page](https://www.nyc.gov/content/planning/pages/resources/datasets/mappluto-pluto-change)). Ladder step 1.
 - **Use**: lot-level attributes and residential unit counts. Part of the Spine.
-- **Terms**: DCP "use limitations" (informational only, no warranty). **Terms Status**: `pending`.
+- **Terms**: DCP "use limitations" (informational only, no warranty). **Terms Status**: `approved` by the owner on 2026-11-22, for automated collection through the official API, after reading the DCP PLUTO page, the NYC Open Data FAQ, the NYC.gov Terms of Use and the Open Data `robots.txt`.
 
 ### Geosupport Desktop Edition
 

@@ -19,4 +19,4 @@ CI runs fully offline. Collectors are tested with recorded responses: real pages
 
 ## Elementary replaces the hand-written volume test
 
-`pipeline_runs`, written by the Python collectors, is declared as a dbt source, so Elementary's volume anomaly tests watch both collection counts and dbt tables. This removes custom code we would otherwise maintain. Elementary's support for our PostgreSQL version is to confirm in Phase 1.
+`pipeline_runs`, written by the Python collectors, is declared as a dbt source, so Elementary's volume anomaly tests watch both collection counts and dbt tables. This removes custom code we would otherwise maintain. Elementary 0.26.1 was confirmed to run on PostgreSQL 17 in Phase 1.

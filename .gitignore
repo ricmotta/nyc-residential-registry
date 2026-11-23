@@ -17,3 +17,10 @@ build/
 .idea/
 .DS_Store
 Thumbs.db
+
+# dbt
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+logs/
+dbt/.user.yml

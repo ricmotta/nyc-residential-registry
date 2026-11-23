@@ -8,5 +8,5 @@ Silver and Gold live in PostgreSQL with PostGIS, transformed by dbt (`dbt-postgr
 
 ## Consequences
 
-- All code reaches object storage only through the S3 API, so the local store can be swapped for real AWS S3, or another S3-compatible store, by changing endpoints and credentials. The local store is SeaweedFS (exact version to confirm in Phase 1), because MinIO Community stopped publishing images in 2025 and LocalStack now requires an account and auth token.
+- All code reaches object storage only through the S3 API, so the local store can be swapped for real AWS S3, or another S3-compatible store, by changing endpoints and credentials. The local store is SeaweedFS (4.52, pinned in Phase 1), because MinIO Community stopped publishing images in 2025 and LocalStack now requires an account and auth token.
 - Because Bronze stays as plain files in object storage, moving Silver and Gold to a lakehouse later remains possible without fetching again.

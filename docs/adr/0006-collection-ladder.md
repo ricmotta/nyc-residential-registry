@@ -17,9 +17,15 @@ Each Source entry in `docs/source-catalog.md` records its chosen step and why th
 
 The stricter of `robots.txt` and the terms of use wins. Even for a Source the owner marked `approved`, a collector reads `robots.txt` before every Fetch and never requests a path it disallows; instead it records a Gap with the reason "blocked by terms" and does not fail. If a site tightens its `robots.txt`, collectors follow it with no code change.
 
+## Content signals
+
+Collectors also read `Content-Signal` lines in `robots.txt` (used by Cloudflare; not part of RFC 9309). When a site declares `ai-input=no`, its content is never sent to an LLM: extraction from that Source uses only rules and parsers, and a field they cannot extract becomes a Gap. `ai-train` and `search` do not affect us, because we neither train models nor run a search engine. This follows the same principle as above: the stricter of our rules and the site's wishes wins.
+
 ## Identification
 
 Collectors send a generic User-Agent, `nyc-residential-registry/<version>`, with no personal details or contact link. It is a configuration value, not hard-coded.
+
+Some Publishers require contact details in the User-Agent; Wikimedia's policy, for example, rejects generic agents. We do not make exceptions: such Sources are not collected automatically, and any use of them is a manual step.
 
 ## Politeness
 

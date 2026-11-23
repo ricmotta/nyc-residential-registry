@@ -74,7 +74,15 @@ The main finding stands: public data answers "which buildings exist and what are
 - **Cadence** (DCP's page): a quarterly major release updates all fields; monthly minor releases update zoning fields only. So building fields change only quarterly.
 - **Access**: Socrata API ([dataset](https://data.cityofnewyork.us/City-Government/Primary-Land-Use-Tax-Lot-Output-PLUTO-/64uk-42ks)) or DCP download ([page](https://www.nyc.gov/content/planning/pages/resources/datasets/mappluto-pluto-change)). Ladder step 1.
 - **Use**: lot-level attributes and residential unit counts. Part of the Spine.
-- **Terms**: DCP "use limitations" (informational only, no warranty). **Terms Status**: `pending`.
+- **Terms**: DCP "use limitations" (informational only, no warranty). **Terms Status**: `approved` by the owner on 2026-11-22, for automated collection through the official API, after reading the DCP PLUTO page, the NYC Open Data FAQ, the NYC.gov Terms of Use and the Open Data `robots.txt`.
+
+### 2020 Neighborhood Tabulation Areas (NTAs)
+
+- **Publisher**: DCP. Dataset [`9nt8-h7nd`](https://data.cityofnewyork.us/d/9nt8-h7nd). 262 areas citywide; revised with each census.
+- **Fields ✅**: `nta2020`, `ntaname`, `ntaabbrev`, `ntatype`, `borocode`, `boroname`, `countyfips`, `cdta2020`, `cdtaname`, `shape_leng`, `shape_area`, `the_geom`.
+- **Access**: Socrata API. Ladder step 1.
+- **Use**: a reference Source, not a source of Claims: its polygons define the project scope (ADR 0009). It goes through Bronze like any Source, so the scope filter can be rebuilt.
+- **Terms**: same as PLUTO (Open Data FAQ, NYC.gov Terms of Use); a DCP "use limitations" note specific to this dataset is to confirm. **Terms Status**: `approved` by the owner on 2026-11-22, for automated collection through the official API, on the same basis as PLUTO.
 
 ### Geosupport Desktop Edition
 

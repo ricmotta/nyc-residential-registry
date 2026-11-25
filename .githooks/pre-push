@@ -1,0 +1,36 @@
+#!/bin/sh
+# Pre-push hook: runs the same four checks as CI and blocks the push on the
+# first failure. CI stays the final gate (ADR 0010).
+# Enable once per clone: git config core.hooksPath .githooks
+# It checks the working tree, so commit or set aside unrelated changes first.
+
+set -u
+
+cd "$(git rev-parse --show-toplevel)" || exit 1
+
+if command -v uv >/dev/null 2>&1; then
+    uv_cmd="uv"
+elif command -v python >/dev/null 2>&1 && python -m uv --version >/dev/null 2>&1; then
+    uv_cmd="python -m uv"
+else
+    echo "pre-push: uv not found (tried 'uv' and 'python -m uv'). Install it: https://docs.astral.sh/uv/" >&2
+    exit 1
+fi
+
+run_check() {
+    name="$1"
+    shift
+    echo "pre-push: $name: $uv_cmd run $*"
+    # $uv_cmd is unquoted on purpose so "python -m uv" splits into words.
+    if ! $uv_cmd run "$@"; then
+        echo "pre-push: $name failed. Push blocked; fix it and push again." >&2
+        exit 1
+    fi
+}
+
+run_check "Lint" ruff check .
+run_check "Format check" ruff format --check .
+run_check "Type check" mypy
+run_check "Tests" pytest
+
+echo "pre-push: all checks passed."

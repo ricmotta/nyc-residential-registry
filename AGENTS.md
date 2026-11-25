@@ -19,7 +19,7 @@ The project uses Python 3.12 and [uv](https://docs.astral.sh/uv/) (`uv.lock` pin
 - Types: `uv run mypy`
 - Tests: `uv run pytest`
 
-Lint includes ruff `banned-api` rules (TID251, in `pyproject.toml`): `boto3`/`botocore` only in `nyc_registry.storage`, `psycopg` only in `nyc_registry.db`, and `httpx` only in the collector HTTP client (until it exists, one marked line in `nyc_registry.smoke`). If one fires, follow its message; do not add a `noqa` or a per-file ignore to get around it.
+Lint includes ruff `banned-api` rules (TID251, in `pyproject.toml`): `boto3`/`botocore` only in `nyc_registry.storage`, `psycopg` only in `nyc_registry.db`, and `httpx` only in the collector HTTP client (until it exists, the one line marked `# noqa: TID251` in `nyc_registry.smoke`, removed with #15). If one fires, follow its message; that line is the only allowed `noqa: TID251`, so do not add another or a per-file ignore to get around a rule.
 
 CI runs all four on every pull request and never calls a real data Source. Add new commands here when they exist (for example `dbt build`).
 

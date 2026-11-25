@@ -64,7 +64,9 @@ def test_import_outside_its_module_fails_with_guidance(source: str, message: str
     ],
 )
 def test_import_in_its_own_module_is_allowed(source: str, path: str) -> None:
-    assert "TID251" not in lint(source, path)
+    output = lint(source, path)
+    assert "F401" in output  # ruff did lint the snippet
+    assert "TID251" not in output
 
 
 def test_the_temporary_httpx_exception_does_not_cover_the_whole_smoke_module() -> None:

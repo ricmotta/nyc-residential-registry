@@ -57,7 +57,7 @@ select = [
 "boto3".msg = "use nyc_registry.storage: object storage is reached only through the S3 API there (ADR 0002)."
 "botocore".msg = "use nyc_registry.storage: object storage is reached only through the S3 API there (ADR 0002)."
 "psycopg".msg = "use nyc_registry.db: database connections are opened only there, from Settings."
-"httpx".msg = "HTTP belongs in the collector HTTP client (#15), where ADR 0006's politeness rules live. Until it exists, only nyc_registry.smoke may import httpx."
+"httpx".msg = "HTTP belongs in the collector HTTP client (#15), where ADR 0006's politeness rules live. Until it exists, only the marked line in nyc_registry.smoke may import httpx."
 
 [tool.ruff.lint.per-file-ignores]
 "src/nyc_registry/storage.py" = ["TID251"]

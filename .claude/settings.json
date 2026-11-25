@@ -6,8 +6,8 @@
       "Edit(~/Documents/Projects/nyc-residential-registry-holdout/**)",
       "Read(//**/nyc-residential-registry-holdout/**)",
       "Edit(//**/nyc-residential-registry-holdout/**)",
-      "Bash(*nyc-residential-registry-holdout/*)",
-      "Bash(cd *nyc-residential-registry-holdout*)"
+      "Bash(*nyc-residential-registry-holdout*)",
+      "PowerShell(*nyc-residential-registry-holdout*)"
     ]
   }
 }

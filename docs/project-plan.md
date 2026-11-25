@@ -58,7 +58,7 @@ Everything starts with one `docker compose up`, at no cost:
 
 | Piece | Tool | Role |
 |---|---|---|
-| Object storage | S3-compatible: SeaweedFS (exact version to confirm in Phase 1; see ADR 0002) | Bronze files, pages, images |
+| Object storage | S3-compatible: SeaweedFS 4.52 (see ADR 0002) | Bronze files, pages, images |
 | Database | PostgreSQL + PostGIS | Silver and Gold, spatial queries |
 | Transformations | dbt (`dbt-postgres`) | Models, tests, field documentation |
 | Orchestration | Airflow with LocalExecutor (no Celery or Redis); its metadata in a separate database on the same PostgreSQL | Schedules, retries, alerts, run logs |

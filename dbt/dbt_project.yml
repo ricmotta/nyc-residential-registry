@@ -1,0 +1,19 @@
+name: nyc_registry
+version: "0.1.0"
+config-version: 2
+profile: nyc_registry
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+packages-install-path: dbt_packages
+target-path: target
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  elementary:
+    +schema: elementary
+
+flags:
+  send_anonymous_usage_stats: false

@@ -32,6 +32,13 @@ Local environment (Docker, see README): `docker compose up -d`, then `uv run pyt
 - Collectors are idempotent and retry with backoff.
 - Unverified facts are marked "to confirm".
 
+## Delivery flow (ADR 0010)
+
+- Every ticket starts with `Holdout: required` or `Holdout: not needed`. A `Holdout: required` ticket gets `ready-for-agent` only once its Holdout Scenarios are `confirmed`.
+- Before opening a pull request, run the checks and self-review with the `mattpocock-skills:code-review` skill; put a one-line self-review summary in the PR body.
+- After a failing Holdout Report, fix on the same branch using only the report lines, with at most 2 fix attempts. If it still fails, stop, label the ticket `ready-for-human` and comment what you tried.
+- Changes to Terms Status, Owner Decisions or ADRs are never merged without the owner.
+
 ## Never
 
 - Collect from a source whose terms status in `docs/source-catalog.md` is not
@@ -39,6 +46,8 @@ Local environment (Docker, see README): `docker compose up -d`, then `uv run pyt
 - Modify or delete anything in Bronze. It is append-only.
 - Fail silently: no bare `except`, no swallowed errors. Log and propagate.
 - Add personal or employment-related information to the repository.
+- Read, search or copy the Holdout Scenarios repository (`nyc-residential-registry-holdout`) from a coding session, or guess its expected values.
+- Mark a Holdout Scenario `confirmed` or `retired`. Only the owner does.
 
 ## Agent skills
 

@@ -19,6 +19,8 @@ The project uses Python 3.12 and [uv](https://docs.astral.sh/uv/) (`uv.lock` pin
 - Types: `uv run mypy`
 - Tests: `uv run pytest`
 
+Lint includes ruff `banned-api` rules (TID251, in `pyproject.toml`): `boto3`/`botocore` only in `nyc_registry.storage`, `psycopg` only in `nyc_registry.db`, and `httpx` only in the collector HTTP client (until it exists, one marked line in `nyc_registry.smoke`). If one fires, follow its message; do not add a `noqa` or a per-file ignore to get around it.
+
 CI runs all four on every pull request and never calls a real data Source. Add new commands here when they exist (for example `dbt build`).
 
 Enable the pre-push hook once per clone with `git config core.hooksPath .githooks`. `.githooks/pre-push` runs the same four checks and blocks the push on the first failure (ADR 0010). It falls back to `python -m uv` (or `python3 -m uv`) when `uv` is not on PATH. CI stays the final gate; when a check is added here, add it to the hook and to CI too.

@@ -12,10 +12,11 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 
-import httpx
-import psycopg
+# Temporary exception, scoped to this line: moves to the collector HTTP client (#15).
+import httpx  # noqa: TID251
 
 from nyc_registry.config import Settings
+from nyc_registry.db import connect
 from nyc_registry.storage import ensure_bucket, s3_client
 
 DBT_PROJECT_DIR = Path(__file__).resolve().parents[2] / "dbt"
@@ -29,7 +30,7 @@ class CheckResult:
 
 
 def check_postgis(settings: Settings) -> str:
-    with psycopg.connect(settings.postgres_conninfo(), connect_timeout=5) as conn:
+    with connect(settings, connect_timeout=5) as conn:
         row = conn.execute(
             "SELECT postgis_lib_version(), current_setting('server_version')"
         ).fetchone()

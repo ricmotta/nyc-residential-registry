@@ -50,7 +50,7 @@ Local environment (Docker, see README): `docker compose up -d`, then `uv run pyt
 - Modify or delete anything in Bronze. It is append-only.
 - Fail silently: no bare `except`, no swallowed errors. Log and propagate.
 - Add personal or employment-related information to the repository.
-- Read, search or copy the Holdout Scenarios repository (`nyc-residential-registry-holdout`) from a coding session, or guess its expected values.
+- Read, search or copy the Holdout Scenarios repository (`nyc-residential-registry-holdout`) from a coding session, by any tool including Bash or scripts, or guess its expected values. `.claude/settings.json` denies the common paths; discipline covers the rest (ADR 0010).
 - Mark a Holdout Scenario `confirmed` or `retired`. Only the owner does.
 
 ## Agent skills

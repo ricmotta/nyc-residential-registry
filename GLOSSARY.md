@@ -87,3 +87,13 @@ _Avoid_: Old, expired, outdated
 **Owner Decision**:
 A choice made by the project owner rather than taken from any Source, such as a manual override, a hand-labeled match pair or a source ranking. Owner Decisions are versioned in the repository, never edited only in the database.
 _Avoid_: Manual entry, admin edit
+
+### Delivery
+
+**Holdout Scenario**:
+A fact about the registry, confirmed by the owner, that a change must keep true, such as "this Tax Lot has 6 floors" or "this address belongs to this Building". It is kept away from whoever writes the code, so passing it proves the code is right rather than tuned to the test.
+_Avoid_: Acceptance test, golden record, fixture
+
+**Holdout Report**:
+The short result of running the Holdout Scenarios against a change: how many passed, and which scenario and field failed, without revealing the expected values.
+_Avoid_: Satisfaction report, test report

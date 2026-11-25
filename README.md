@@ -32,7 +32,9 @@ and stops on the first failure:
 git config core.hooksPath .githooks
 ```
 
-CI still runs every check on each pull request and stays the final gate.
+The hook checks the working tree, not only the commits being pushed, so commit or
+set aside unrelated changes first. CI still runs every check on each pull request
+and stays the final gate.
 
 ## Local environment
 

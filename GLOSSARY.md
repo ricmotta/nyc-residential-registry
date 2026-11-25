@@ -91,7 +91,7 @@ _Avoid_: Manual entry, admin edit
 ### Delivery
 
 **Holdout Scenario**:
-A fact about the registry, confirmed by the owner, that a change must keep true, such as "this Tax Lot has 6 floors" or "this address belongs to this Building". It is kept away from whoever writes the code, so passing it proves the code is right rather than tuned to the test.
+An expected value about the registry, confirmed by the owner and hidden from whoever writes the code, such as "this Tax Lot has 6 floors" or "this address belongs to this Building".
 _Avoid_: Acceptance test, golden record, fixture
 
 **Holdout Report**:

@@ -34,10 +34,10 @@ Local environment (Docker, see README): `docker compose up -d`, then `uv run pyt
 
 ## Delivery flow (ADR 0010)
 
-- Every ticket starts with `Holdout: required` or `Holdout: not needed`. A `Holdout: required` ticket is ready only once its Holdout Scenarios are `confirmed`.
-- Before opening a pull request, run the checks and self-review with the `code-review` skill (default effort); put a one-line self-review summary in the PR body.
-- When a Holdout Report fails, fix on the same branch using only the report lines. After 2 failed attempts, stop, label the ticket `ready-for-human` and summarize what you tried.
-- Changes to Terms Status, Owner Decisions, Review Queue decisions or ADRs are never merged or auto-merged without the owner.
+- Every ticket starts with `Holdout: required` or `Holdout: not needed`. A `Holdout: required` ticket gets `ready-for-agent` only once its Holdout Scenarios are `confirmed`.
+- Before opening a pull request, run the checks and self-review with the `mattpocock-skills:code-review` skill; put a one-line self-review summary in the PR body.
+- After a failing Holdout Report, fix on the same branch using only the report lines, with at most 2 fix attempts. If it still fails, stop, label the ticket `ready-for-human` and comment what you tried.
+- Changes to Terms Status, Owner Decisions or ADRs are never merged without the owner.
 
 ## Never
 

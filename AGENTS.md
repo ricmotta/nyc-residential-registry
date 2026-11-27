@@ -21,6 +21,8 @@ The project uses Python 3.12 and [uv](https://docs.astral.sh/uv/) (`uv.lock` pin
 
 CI runs all four on every pull request and never calls a real data Source. Add new commands here when they exist (for example `dbt build`).
 
+Enable the pre-push hook once per clone with `git config core.hooksPath .githooks`. `.githooks/pre-push` runs the same four checks and blocks the push on the first failure (ADR 0010). It falls back to `python -m uv` (or `python3 -m uv`) when `uv` is not on PATH. CI stays the final gate; when a check is added here, add it to the hook and to CI too.
+
 Local environment (Docker, see README): `docker compose up -d`, then `uv run python -m nyc_registry.smoke` must exit 0. Settings always come from environment variables (`.env`, copied from `.env.example`); never hard-code endpoints or credentials, and reach object storage only through the S3 API (ADR 0002).
 
 ## Conventions

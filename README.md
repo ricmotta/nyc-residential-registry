@@ -25,6 +25,17 @@ uv run pytest      # run the tests
 
 `AGENTS.md` lists every check that CI runs.
 
+Enable the pre-push hook once per clone, so `git push` runs the same checks first
+and stops on the first failure:
+
+```sh
+git config core.hooksPath .githooks
+```
+
+The hook checks the working tree, not only the commits being pushed, so commit or
+set aside unrelated changes first. CI still runs every check on each pull request
+and stays the final gate.
+
 ## Local environment
 
 Requires Docker with Docker Compose. One command starts PostgreSQL 17 with PostGIS 3.7,

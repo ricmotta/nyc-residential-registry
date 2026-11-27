@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "deny": [
+      "Read(~/Documents/Projects/nyc-residential-registry-holdout/**)",
+      "Edit(~/Documents/Projects/nyc-residential-registry-holdout/**)",
+      "Read(//**/nyc-residential-registry-holdout/**)",
+      "Edit(//**/nyc-residential-registry-holdout/**)",
+      "Bash(*nyc-residential-registry-holdout*)",
+      "PowerShell(*nyc-residential-registry-holdout*)"
+    ]
+  }
+}
